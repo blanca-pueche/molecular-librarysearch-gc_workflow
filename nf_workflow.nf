@@ -1,50 +1,47 @@
-#!/usr/bin/env nextflow
+
 nextflow.enable.dsl=2
 
-params.input = "README.md"
+//deconvolved ei spectra mgf file
+params.spectra = "data/clutered_spectra-main.mgf"
+//spectral library 
+params.library = "data/GNPS-NIST14-MATCHES.mgf"
+//feature quantification table : TODO
+params.quant_table = "data/quant_table-main.csv"
+//feature reformatted quantification table : TODO
+params.quant_reform_table = "data/"
+
 
 TOOL_FOLDER = "$baseDir/bin"
 
-process processDataPython {
+process processData{
     publishDir "./nf_output", mode: 'copy'
 
     conda "$TOOL_FOLDER/conda_env.yml"
 
     input:
-    file input 
+    path spectra
+    path library
+    path quant_table
+    path quant_reform_table
+
 
     output:
-    file 'python_output.tsv'
+    file'output.tsv'
 
+    //TODO
     """
-    python $TOOL_FOLDER/python_script.py $input python_output.tsv
-    """
-}
+    python $TOOL_FOLDER/python_script.py \
+    $spectra $library $quant_table $quant_reform_table \ 
+    output.tsv \
 
-process processDataR {
-    publishDir "./nf_output", mode: 'copy'
-
-    conda "$TOOL_FOLDER/conda_env_r.yml"
-
-    input:
-    file input 
-
-    output:
-    file 'R_output.txt'
-    file 'rpy2_output.txt'
-
-    """
-    Rscript  $TOOL_FOLDER/R_script.R
-    python $TOOL_FOLDER/rpy2_script.py
     """
 }
 
 workflow {
-    data = Channel.fromPath(params.input)
+    spectra_channel = Channel.fromPath(params.spectra)
+    library_channel = Channel.fromPath(params.library)
+    quant_table_channel = Channel.fromPath(params.quant_table)
+    quant_reform_table_channel = Channel.fromPath(params.quant_reform_table)
     
-    // Outputting Python
-    processDataPython(data)
-
-    // Outputting R
-    processDataR(data)
+    processData(spectra_channel, library_channel, quant_table_channel, quant_reform_table_channel)
 }
