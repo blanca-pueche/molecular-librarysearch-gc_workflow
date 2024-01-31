@@ -1,0 +1,38 @@
+==> 2024-01-29 14:32:20 <==
+# cmd: /home/blancapueche/miniforge3/bin/mamba create --prefix /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/conda/conda_env-9a90399072a7ea9496bb54297e47b2ae --file /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/bin/conda_env.yml
+# conda version: 23.3.1
++conda-forge/linux-64::_libgcc_mutex-0.1-conda_forge
++conda-forge/linux-64::_openmp_mutex-4.5-2_gnu
++conda-forge/linux-64::ca-certificates-2023.11.17-hbcca054_0
++conda-forge/linux-64::ld_impl_linux-64-2.40-h41732ed_0
++conda-forge/linux-64::libblas-3.9.0-21_linux64_openblas
++conda-forge/linux-64::libcblas-3.9.0-21_linux64_openblas
++conda-forge/linux-64::libffi-3.3-h58526e2_2
++conda-forge/linux-64::libgcc-ng-13.2.0-h807b86a_4
++conda-forge/linux-64::libgfortran-ng-13.2.0-h69a702a_4
++conda-forge/linux-64::libgfortran5-13.2.0-ha4646dd_4
++conda-forge/linux-64::libgomp-13.2.0-h807b86a_4
++conda-forge/linux-64::liblapack-3.9.0-21_linux64_openblas
++conda-forge/linux-64::libopenblas-0.3.26-pthreads_h413a1c8_0
++conda-forge/linux-64::libsqlite-3.44.2-h2797004_0
++conda-forge/linux-64::libstdcxx-ng-13.2.0-h7e041cc_4
++conda-forge/linux-64::libzlib-1.2.13-hd590300_5
++conda-forge/linux-64::ncurses-6.4-h59595ed_2
++conda-forge/linux-64::numpy-1.24.4-py38h59b608b_0
++conda-forge/linux-64::openssl-1.1.1w-hd590300_0
++conda-forge/linux-64::pandas-2.0.3-py38h01efb38_1
++conda-forge/linux-64::python-3.8.8-hffdb5ce_0_cpython
++conda-forge/linux-64::python_abi-3.8-4_cp38
++conda-forge/linux-64::readline-8.2-h8228510_1
++conda-forge/linux-64::sqlite-3.44.2-h2c6b66d_0
++conda-forge/linux-64::tk-8.6.13-noxft_h4845f30_101
++conda-forge/linux-64::xz-5.2.6-h166bdaf_0
++conda-forge/linux-64::zlib-1.2.13-hd590300_5
++conda-forge/noarch::pip-23.3.2-pyhd8ed1ab_0
++conda-forge/noarch::python-dateutil-2.8.2-pyhd8ed1ab_0
++conda-forge/noarch::python-tzdata-2023.4-pyhd8ed1ab_0
++conda-forge/noarch::pytz-2023.3.post1-pyhd8ed1ab_0
++conda-forge/noarch::setuptools-69.0.3-pyhd8ed1ab_0
++conda-forge/noarch::six-1.16.0-pyh6c4a22f_0
++conda-forge/noarch::wheel-0.42.0-pyhd8ed1ab_0
+# update specs: ['pip', 'python=3.8.8', 'pandas']

@@ -1,0 +1,33 @@
+{
+  "build": "4_cp38",
+  "build_number": 4,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [
+    "python 3.8.* *_cpython"
+  ],
+  "depends": [],
+  "extracted_package_dir": "/home/blancapueche/miniforge3/pkgs/python_abi-3.8-4_cp38",
+  "features": "",
+  "files": [],
+  "fn": "python_abi-3.8-4_cp38.conda",
+  "license": "BSD-3-Clause",
+  "link": {
+    "source": "/home/blancapueche/miniforge3/pkgs/python_abi-3.8-4_cp38",
+    "type": 1
+  },
+  "md5": "ea6b353536f42246cd130c7fef1285cf",
+  "name": "python_abi",
+  "package_tarball_full_path": "/home/blancapueche/miniforge3/pkgs/python_abi-3.8-4_cp38.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "54276b9259f5c72d160c75c45c50c4e03695da56e6646518801f567fc5979030",
+  "size": 6371,
+  "subdir": "linux-64",
+  "timestamp": 1695147367000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/python_abi-3.8-4_cp38.conda",
+  "version": "3.8"
+}

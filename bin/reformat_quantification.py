@@ -12,15 +12,24 @@ import msdial_formatter_gc
 
 def main():
     parser = argparse.ArgumentParser(description='Create parallel parameters')
+
     parser.add_argument('toolname', help='name of input tool')
-    parser.add_argument('quantification_table', help='quantification_table')
-    parser.add_argument('quantification_table_reformatted', help='quantification_table_reformatted')
     parser.add_argument('input_spectra_folder', help='input_spectra_folder')
+    parser.add_argument('quantification_table', help='quantification_table')
+
+    parser.add_argument('quantification_table_reformatted', help='quantification_table_reformatted')
     parser.add_argument('output_mgf', help='output_mgf')
-    parser.add_argument('workflowParameters', help='workflowParameters')
+
     args = parser.parse_args()
 
     input_filenames = glob.glob(os.path.join(args.input_spectra_folder, "*"))
+    
+    # debug to solve problem (doesnt recognize mgf file)
+    print(args.input_spectra_folder)
+    files = glob.glob(os.path.join(args.input_spectra_folder, "*"))
+    print(files)
+    print(input_filenames)
+
 
     if args.toolname == "MZMINE2":
         print("MZMINE2")

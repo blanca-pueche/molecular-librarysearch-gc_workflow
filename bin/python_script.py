@@ -36,14 +36,15 @@ def main():
     parser.add_argument('spectra')
     parser.add_argument('library')
     parser.add_argument('quant_table')
-    parser.add_argument('quant_reform_table')
     # output
+    parser.add_argument('quant_reform_table')
     parser.add_argument('output_file')
 
     args = parser.parse_args()
 
-    # TODO
     
+    # saving file
+    df.to_csv(args.output_file, sep="\t", index=False)
 
 if __name__ == "__main__":
     main()
