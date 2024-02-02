@@ -8,13 +8,14 @@ import ming_fileio_library
 from collections import defaultdict
 
 def usage():
-    print "<input folder> <output tsv file>"
+    print ("<input folder> <output tsv file>")
 
 
 
 
 def main():
-    input_folder_path = sys.argv[1]
+    # takes these valuess from comand line arguments!?
+    input_folder_path = sys.argv[1]  
     output_tsv = sys.argv[2]
 
     files = ming_fileio_library.list_files_in_dir(input_folder_path)

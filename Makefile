@@ -1,3 +1,6 @@
+clean: 
+	rm -Rf .nextflow* nf_output work 
+
 run:
 	nextflow run ./nf_workflow.nf -resume -c nextflow.config
 

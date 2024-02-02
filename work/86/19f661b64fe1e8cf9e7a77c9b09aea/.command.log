@@ -1,5 +1,0 @@
-usage: reformat_quantification.py [-h]
-                                  toolname input_spectra_folder
-                                  quantification_table
-                                  quantification_table_reformatted output_mgf
-reformat_quantification.py: error: the following arguments are required: quantification_table_reformatted, output_mgf

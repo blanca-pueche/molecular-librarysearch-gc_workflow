@@ -23,13 +23,6 @@ def main():
     args = parser.parse_args()
 
     input_filenames = glob.glob(os.path.join(args.input_spectra_folder, "*"))
-    
-    # debug to solve problem (doesnt recognize mgf file)
-    print(args.input_spectra_folder)
-    files = glob.glob(os.path.join(args.input_spectra_folder, "*"))
-    print(files)
-    print(input_filenames)
-
 
     if args.toolname == "MZMINE2":
         print("MZMINE2")
