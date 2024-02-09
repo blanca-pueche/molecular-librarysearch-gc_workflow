@@ -108,7 +108,7 @@ process gnps_library_annotations{    //line 94 in tools.xml
 
     """
     python $TOOL_FOLDER/getGNPS_library_annotations.py \
-    $result\ 
+    $result \ 
     db_result.tsv\
     """
 } 
@@ -274,7 +274,7 @@ process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml
     conda "$TOOL_FOLDER/conda_env.yml"
 
     input:
-    path workflowParameters //file
+    path workflowParams //file
     path quantification_table //file
     path metadata_table //folder
     path spectra //file
@@ -284,7 +284,7 @@ process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml
 
     """
     python $TOOL_FOLDER/clusterinfosummary_for_featurenetworks.py\
-    $workflowParameters $quantification_table $metadata_table $spectra\ 
+    $workflowParams $quantification_table $metadata_table $spectra\ 
     clusterinfo_summary.tsv\
     """
 } 
@@ -297,14 +297,14 @@ process write_description{    //line 297 in tools.xml
     conda "$TOOL_FOLDER/conda_env.yml"
 
     input:
-    path workflowParameters //file
+    path workflowParams //file
 
     output:
     path 'written_description.html'
 
     """
     python $TOOL_FOLDER/write_description.py\
-    $workflowParameters\ 
+    $workflowParams\ 
     written_description.html\
     """
 } 
