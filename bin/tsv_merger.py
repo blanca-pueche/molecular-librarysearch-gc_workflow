@@ -14,9 +14,8 @@ def usage():
 
 
 def main():
-    # takes these valuess from comand line arguments!?
     input_folder_path = sys.argv[1]  
-    output_tsv = sys.argv[2]
+    output_tsv = sys.argv[2] 
 
     files = ming_fileio_library.list_files_in_dir(input_folder_path)
 
