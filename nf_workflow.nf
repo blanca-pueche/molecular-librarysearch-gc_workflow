@@ -35,25 +35,6 @@ process reformat_quant_table{      //line 12 in tools.xml
     """
 }
 
-process main_execmoduleParamsGen {      //line 43 in tools.xml 
-    publishDir "./nf_output", mode: 'copy'
-
-    conda "$TOOL_FOLDER/conda_env.yml"
-
-    input:
-    path spectra 
-    path library
-
-    output:
-    path paramsgen
-
-    """
-    python $TOOL_FOLDER/main_execmodule \
-    $spectra_reformatted $library\
-    paramsgen
-
-    """
-}
 
 process main_execmoduleParallel {      //line 61 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
@@ -66,13 +47,19 @@ process main_execmoduleParallel {      //line 61 in tools.xml
 
     output:
     path result
+    //path "networking_pairs_results_folder.aligns"
 
     """
-    python $TOOL_FOLDER/main_execmodule \
+    python $TOOL_FOLDER/library_search_wrapper.py \
     $spectra_reformatted $library \
-    result
-
+    result 
+    
     """
+    /*"""
+    python $TOOL_FOLDER/library_search_wrapper.py \
+    $spectra_reformatted $library \
+    networking_pairs_results_folder.aligns
+    """*/
 }
 
 process tsv_merger{      //line 76 in tools.xml 
@@ -151,7 +138,7 @@ process prep_molecular_networking_parameters{    //line 144 in tools.xml
     """
 } 
 
-process main_execmoduleMolecularNetworkingParallel{    //line 158 in tools.xml 
+/*process main_execmoduleMolecularNetworkingParallel{    //line 158 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
     conda "$TOOL_FOLDER/conda_env.yml"
@@ -165,11 +152,11 @@ process main_execmoduleMolecularNetworkingParallel{    //line 158 in tools.xml
     path "networking_pairs_results_folder.aligns"
 
     """
-    python $TOOL_FOLDER/main_execmodule \
+    python $TOOL_FOLDER/library_search_wrapper.py \
     $networking_parameters $mgf_file $workflowParams\ 
     networking_pairs_results_folder.aligns\
     """
-} 
+} */
 
 process merge_tsv_files_efficient{    //line 172 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
@@ -267,7 +254,6 @@ process add_mshub_balanced_score{    //line 249 in tools.xml
 } 
 
 // CLUSTER INFO
-
 process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
@@ -290,7 +276,6 @@ process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml
 } 
 
 // RUNNING WRITTEN DESCRIPTION
-
 process write_description{    //line 297 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
@@ -310,7 +295,6 @@ process write_description{    //line 297 in tools.xml
 } 
 
 // RUNNING QIIME2
-
 process run_qiime2{    //line 318 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
@@ -336,5 +320,7 @@ workflow {
     quant_table_channel = Channel.fromPath(params.quant_table)
     
     reformat_quant_table(tool_name_channel, spectra_channel, quant_table_channel) // produces the intermediate_folder for tsv_merger
+    
+
 
 }
