@@ -89,8 +89,8 @@ def main():
     parser.add_argument('library_file', help='library_file')
 
     parser.add_argument('result_folder', help='output folder for results')
-    parser.add_argument('--convert_binary', default='./convert', help='conversion binary')
-    parser.add_argument('--librarysearch_binary', default='./main_execmodule',help='librarysearch_binary') # = main_execmodule
+    parser.add_argument('convert_binary', help='conversion binary')
+    parser.add_argument('librarysearch_binary', help='librarysearch_binary') # = main_execmodule
 
     parser.add_argument('--pm_tolerance', default=1, help='pm_tolerance')
     parser.add_argument('--fragment_tolerance', default=0.5, help='fragment_tolerance')

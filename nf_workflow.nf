@@ -35,7 +35,6 @@ process reformat_quant_table{      //line 12 in tools.xml
     """
 }
 
-
 process main_execmoduleParallel {      //line 61 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
@@ -46,18 +45,21 @@ process main_execmoduleParallel {      //line 61 in tools.xml
     path library
 
     output:
-    path result
+    path results
     //path "networking_pairs_results_folder.aligns"
 
     """
+    mkdir -p results
+
     python $TOOL_FOLDER/library_search_wrapper.py \
-    $spectra_reformatted $library \
-    result 
+    $spectra $library \
+    results \
+    $TOOL_FOLDER/convert $TOOL_FOLDER/main_execmodule
     
     """
     /*"""
     python $TOOL_FOLDER/library_search_wrapper.py \
-    $spectra_reformatted $library \
+    $spectra $library \
     networking_pairs_results_folder.aligns
     """*/
 }
@@ -95,8 +97,9 @@ process gnps_library_annotations{    //line 94 in tools.xml
 
     """
     python $TOOL_FOLDER/getGNPS_library_annotations.py \
-    $result \ 
-    db_result.tsv\
+    $result \
+    db_result.tsv
+
     """
 } 
 
@@ -113,8 +116,8 @@ process filter_gc_identifications{    //line 114 in tools.xml
 
     """
     python $TOOL_FOLDER/pgetGNPS_library_annotations.py \
-    $db_result\ 
-    db_result_filtered.tsv\
+    $db_result \
+    db_result_filtered.tsv
     """
 } 
 
@@ -133,8 +136,8 @@ process prep_molecular_networking_parameters{    //line 144 in tools.xml
 
     """
     python $TOOL_FOLDER/prep_molecular_networking_parameters.py \
-    $mgf_file $workflowParams\ 
-    networking_parameters\
+    $mgf_file $workflowParams \
+    networking_parameters
     """
 } 
 
@@ -171,7 +174,7 @@ process merge_tsv_files_efficient{    //line 172 in tools.xml
 
     """
     python $TOOL_FOLDER/merge_tsv_files_efficient.py \
-    $tsv_folder\ 
+    $tsv_folder \
     tsv_file.tsv
     """
 } 
@@ -190,8 +193,8 @@ process filter_networking_edges{    //line 183 in tools.xml
 
     """
     python $TOOL_FOLDER/filter_networking_edges.py \
-    $workflowParams $networking_pairs_results_file\ 
-    networking_pairs_results_file_filtered.tsv\
+    $workflowParams $networking_pairs_results_file \
+    networking_pairs_results_file_filtered.tsv
     """
 } 
 
@@ -209,9 +212,9 @@ process convert_networks_to_graphml{    //line 204 in tools.xml (python 2.7)
     path "gnps_molecular_network_graphml.graphml"
 
     """
-    python $TOOL_FOLDER/convert_networks_to_graphml.py\
-    $networking_parameters $mgf_file $workflowParams\ 
-    networking_pairs_results_folder.aligns\
+    python $TOOL_FOLDER/convert_networks_to_graphml.py \
+    $networking_parameters $mgf_file $workflowParams \
+    networking_pairs_results_folder.aligns
     """
 } 
 
@@ -228,9 +231,9 @@ process calculate_kovats{    //line 227 in tools.xml
     path "DB_result_kovats.tsv"
 
     """
-    python $TOOL_FOLDER/calculate_kovats.py\
-    $db_results $Carbon_Marker_File\ 
-    DB_result_kovats.tsv\
+    python $TOOL_FOLDER/calculate_kovats.py \
+    $db_results $Carbon_Marker_File \
+    DB_result_kovats.tsv
     """
 } 
 
@@ -247,9 +250,9 @@ process add_mshub_balanced_score{    //line 249 in tools.xml
     path "library_identifications_with_balance.tsv"
 
     """
-    python $TOOL_FOLDER/add_mshub_balance_score.py\
-    $library_identifications $mshub_balance_scores\ 
-    library_identifications_with_balance.tsv\
+    python $TOOL_FOLDER/add_mshub_balance_score.py \
+    $library_identifications $mshub_balance_scores \
+    library_identifications_with_balance.tsv
     """
 } 
 
@@ -269,9 +272,9 @@ process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml
     path 'clusterinfo_summary.tsv'
 
     """
-    python $TOOL_FOLDER/clusterinfosummary_for_featurenetworks.py\
-    $workflowParams $quantification_table $metadata_table $spectra\ 
-    clusterinfo_summary.tsv\
+    python $TOOL_FOLDER/clusterinfosummary_for_featurenetworks.py \
+    $workflowParams $quantification_table $metadata_table $spectra \
+    clusterinfo_summary.tsv
     """
 } 
 
@@ -288,9 +291,9 @@ process write_description{    //line 297 in tools.xml
     path 'written_description.html'
 
     """
-    python $TOOL_FOLDER/write_description.py\
-    $workflowParams\ 
-    written_description.html\
+    python $TOOL_FOLDER/write_description.py \
+    $workflowParams \
+    written_description.html
     """
 } 
 
@@ -308,9 +311,9 @@ process run_qiime2{    //line 318 in tools.xml
     path qiime_output
 
     """
-    python $TOOL_FOLDER/run_qiime2.py\
-    $quantification_table_reformatted $metadata_table\ 
-    qiime_output\
+    python $TOOL_FOLDER/run_qiime2.py \
+    $quantification_table_reformatted $metadata_table \
+    qiime_output
     """
 } 
 
@@ -318,9 +321,20 @@ workflow {
     tool_name_channel = params.tool_name
     spectra_channel = Channel.fromPath(params.spectra)
     quant_table_channel = Channel.fromPath(params.quant_table)
+    library_channel = Channel.fromPath(params.library)
     
     reformat_quant_table(tool_name_channel, spectra_channel, quant_table_channel) // produces the intermediate_folder for tsv_merger
     
+    main_execmoduleParallel(spectra_channel, library_channel)
+
+
+
+    // result = tsv_merger(intermediate_result)
+
+    // db_result = gnps_library_annotations(result)
+
+    // db_result_filtered = filter_gc_identifications(db_result)
+
 
 
 }
