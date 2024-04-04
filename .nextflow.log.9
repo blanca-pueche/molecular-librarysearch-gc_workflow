@@ -1,0 +1,136 @@
+Mar-22 12:57:44.525 [main] DEBUG nextflow.cli.Launcher - $> nextflow nf_workflow.nf
+Mar-22 12:57:44.663 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.0
+Mar-22 12:57:44.693 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/blancapueche/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.2,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.0
+Mar-22 12:57:44.712 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-22 12:57:44.713 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-22 12:57:44.717 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-22 12:57:44.733 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-22 12:57:44.757 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/nextflow.config
+Mar-22 12:57:44.758 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/nextflow.config
+Mar-22 12:57:44.782 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-22 12:57:45.443 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-22 12:57:45.467 [main] INFO  nextflow.cli.CmdRun - Launching `nf_workflow.nf` [sad_swirles] DSL2 - revision: 73540a8781
+Mar-22 12:57:45.469 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-22 12:57:45.469 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Mar-22 12:57:45.479 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/blancapueche/.nextflow/secrets/store.json
+Mar-22 12:57:45.488 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@4613311f] - activable => nextflow.secret.LocalSecretsProvider@4613311f
+Mar-22 12:57:45.561 [main] DEBUG nextflow.Session - Session UUID: 18deb7aa-0676-4b67-9881-9299ac2e1aff
+Mar-22 12:57:45.561 [main] DEBUG nextflow.Session - Run name: sad_swirles
+Mar-22 12:57:45.562 [main] DEBUG nextflow.Session - Executor pool size: 2
+Mar-22 12:57:45.569 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-22 12:57:45.575 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-22 12:57:45.600 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.0 build 5889
+  Created: 15-10-2023 15:07 UTC (17:07 CEST)
+  System: Linux 6.5.0-18-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.21+9-post-Ubuntu-0ubuntu122.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 4468@Ubuntu22 [127.0.1.1]
+  CPUs: 2 - Mem: 3 GB (305.1 MB) - Swap: 2.6 GB (2 GB)
+Mar-22 12:57:45.623 [main] DEBUG nextflow.Session - Work-dir: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work [ext2/ext3]
+Mar-22 12:57:45.645 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-22 12:57:45.659 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-22 12:57:45.678 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-22 12:57:45.698 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 3; maxThreads: 1000
+Mar-22 12:57:45.777 [main] DEBUG nextflow.Session - Session start
+Mar-22 12:57:46.595 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-22 12:57:46.728 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.729 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.740 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Mar-22 12:57:46.747 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=2; memory=3 GB; capacity=2; pollInterval=100ms; dumpInterval=5m
+Mar-22 12:57:46.750 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Mar-22 12:57:46.856 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.857 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.862 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.862 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.866 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.867 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.873 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.878 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.883 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.883 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.894 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-22 12:57:46.894 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-22 12:57:46.900 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: write_description, reformat_quant_table, run_qiime2, filter_networking_edges, tsv_merger, merge_tsv_files_efficient, add_mshub_balanced_score, clusterinfosummary_creation, filter_gc_identifications, gnps_library_annotations, prep_molecular_networking_parameters, convert_networks_to_graphml, main_execmoduleParallel, calculate_kovats
+Mar-22 12:57:46.903 [main] DEBUG nextflow.Session - Igniting dataflow network (12)
+Mar-22 12:57:46.917 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > reformat_quant_table
+Mar-22 12:57:46.922 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > main_execmoduleParallel
+Mar-22 12:57:46.924 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > tsv_merger
+Mar-22 12:57:46.926 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > gnps_library_annotations
+Mar-22 12:57:46.931 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > filter_gc_identifications
+Mar-22 12:57:46.933 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > prep_molecular_networking_parameters
+Mar-22 12:57:46.934 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > clusterinfosummary_creation
+Mar-22 12:57:46.935 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_2d2058ce7548f744: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/nf_workflow.nf
+Mar-22 12:57:46.936 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Mar-22 12:57:46.940 [main] DEBUG nextflow.Session - Session await
+Mar-22 12:57:47.195 [Actor Thread 11] DEBUG nextflow.conda.CondaCache - mamba found local env for environment=/home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/bin/conda_env.yml; path=/home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/conda/gc-molecular-library-search-47b1980fe11deb14fb4149c45b7998b1
+Mar-22 12:57:47.320 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-22 12:57:47.324 [Task submitter] INFO  nextflow.Session - [b0/f1e060] Submitted process > reformat_quant_table (1)
+Mar-22 12:57:47.338 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-22 12:57:47.339 [Task submitter] INFO  nextflow.Session - [c5/d0c616] Submitted process > prep_molecular_networking_parameters (1)
+Mar-22 12:57:48.493 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: prep_molecular_networking_parameters (1); status: COMPLETED; exit: 0; error: -; workDir: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/c5/d0c61689938ddfcae08f3f54a8610c]
+Mar-22 12:57:48.502 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-22 12:57:48.503 [Task submitter] INFO  nextflow.Session - [4b/88fa3b] Submitted process > clusterinfosummary_creation (1)
+Mar-22 12:57:48.543 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=10; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-22 12:57:48.927 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: reformat_quant_table (1); status: COMPLETED; exit: 0; error: -; workDir: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/b0/f1e060d515779a7bb0612f72cb0493]
+Mar-22 12:57:48.936 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-22 12:57:48.937 [Task submitter] INFO  nextflow.Session - [dc/6b0065] Submitted process > main_execmoduleParallel (1)
+Mar-22 12:57:50.110 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: clusterinfosummary_creation (1); status: COMPLETED; exit: 1; error: -; workDir: /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/4b/88fa3bf58593a18fd3db033086763b]
+Mar-22 12:57:50.115 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=clusterinfosummary_creation (1); work-dir=/home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/4b/88fa3bf58593a18fd3db033086763b
+  error [nextflow.exception.ProcessFailedException]: Process `clusterinfosummary_creation (1)` terminated with an error exit status (1)
+Mar-22 12:57:50.126 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'clusterinfosummary_creation (1)'
+
+Caused by:
+  Process `clusterinfosummary_creation (1)` terminated with an error exit status (1)
+
+Command executed:
+
+  python /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/bin/clusterinfosummary_for_featurenetworks.py     parametersINI.params quant_table-main.csv spectra_reformatted.mgf     clusterinfo_summary.tsv
+
+Command exit status:
+  1
+
+Command output:
+  no pyteomics
+  no pyteomics
+
+Command error:
+  no pyteomics
+  no pyteomics
+  Traceback (most recent call last):
+    File "/home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/bin/clusterinfosummary_for_featurenetworks.py", line 278, in <module>
+      main()
+    File "/home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/bin/clusterinfosummary_for_featurenetworks.py", line 274, in main
+      process(args.params_xml, args.consensus_feature_file, args.mgf_filename, args.output_clusterinfo_summary)
+  TypeError: process() missing 1 required positional argument: 'output_clusterinfo_summary'
+
+Work dir:
+  /home/blancapueche/Desktop/Repositorios/molecular-librarysearch-gc_workflow/work/4b/88fa3bf58593a18fd3db033086763b
+
+Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+Mar-22 12:57:50.137 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `clusterinfosummary_creation (1)` terminated with an error exit status (1)
+Mar-22 12:57:50.198 [Task monitor] DEBUG nextflow.Session - The following nodes are still active:
+[process] tsv_merger
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: intermediate_result
+  port 1: (cntrl) -     ; channel: $
+
+[process] gnps_library_annotations
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: result
+  port 1: (cntrl) -     ; channel: $
+
+[process] filter_gc_identifications
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: db_result
+  port 1: (cntrl) -     ; channel: $
+
+Mar-22 12:57:50.223 [main] DEBUG nextflow.Session - Session await > all processes finished
+Mar-22 12:57:50.223 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Mar-22 12:57:50.227 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Mar-22 12:57:50.235 [main] WARN  n.processor.TaskPollingMonitor - Killing running tasks (1)
+Mar-22 12:57:50.251 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=1; retriesCount=0; abortedCount=0; succeedDuration=2.5s; failedDuration=1.5s; cachedDuration=0ms;loadCpus=1; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Mar-22 12:57:50.431 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Mar-22 12:57:50.465 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

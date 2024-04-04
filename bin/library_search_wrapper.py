@@ -15,7 +15,7 @@ def search_files(spectrum_file, library_file, temp_folder, tempresults_folder, p
     min_matched_peaks=1, 
     top_k_results=10, 
     pm_tolerance=1, 
-    ion_tolerance=0.5, 
+    ion_tolerance=0.75, 
     analog_search=0, 
     max_shift_mass=0.5):
 
@@ -93,7 +93,7 @@ def main():
     parser.add_argument('librarysearch_binary', help='librarysearch_binary') # = main_execmodule
 
     parser.add_argument('--pm_tolerance', default=1, help='pm_tolerance')
-    parser.add_argument('--fragment_tolerance', default=0.5, help='fragment_tolerance')
+    parser.add_argument('--fragment_tolerance', default=0.75, help='fragment_tolerance')
     parser.add_argument('--library_min_cosine', default=0.25, help='library_min_cosine')
     parser.add_argument('--library_min_matched_peaks', default=1, help='library_min_matched_peaks')
     parser.add_argument('--topk', default=10, help='topk')

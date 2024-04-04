@@ -1,6 +1,6 @@
 MIN_MATCHED_PEAKS_SEARCH=1
 TOP_K_RESULTS=10
-search_peak_tolerance=0.5
+search_peak_tolerance=0.75
 search_parentmass_tolerance=1
 ANALOG_SEARCH=0
 MAX_SHIFT_MASS=1999
@@ -13,4 +13,4 @@ RESULTS_DIR=tempresults
 NODEIDX=0
 NODECOUNT=1
 EXISTING_LIBRARY_MGF=data/GNPS-NIST14-MATCHES.mgf
-searchspectra=temp/clustered_spectra-main.mgf
+searchspectra=temp/spectra_reformatted.mgf

@@ -119,10 +119,14 @@ def enrich_adduct_annotations(cluster_object, quant_table_object):
     if "auto MS2 verify" in quant_table_object:
         cluster_object["MS2 Verification Comment"] = quant_table_object["auto MS2 verify"]
 
-def process(input_param_xml, input_consensus_feature_file, metadata_files, input_mgf_filename, output_clusterinfo_summary):
-    param_obj = ming_proteosafe_library.parse_xml_file(open(input_param_xml))
+def process(input_param_xml, quant_table_ref, input_consensus_feature_file, metadata_files, input_mgf_filename, output_clusterinfo_summary):
+    #param_obj = ming_proteosafe_library.parse_xml_file(open(input_param_xml))
 
-    task_id = param_obj["task"][0]
+    #task_id = param_obj["task"][0]
+
+
+    task_id = input_param_xml
+
 
     group_to_files_mapping = defaultdict(list)
     attributes_to_groups_mapping = defaultdict(set)
@@ -132,7 +136,7 @@ def process(input_param_xml, input_consensus_feature_file, metadata_files, input
 
     ROW_NORMALIZATION = "None"
     try:
-        ROW_NORMALIZATION = param_obj["QUANT_FILE_NORM"][0]
+        ROW_NORMALIZATION = quant_table_ref
     except:
         ROW_NORMALIZATION = "None"
 
@@ -217,7 +221,10 @@ def process(input_param_xml, input_consensus_feature_file, metadata_files, input
             cluster_obj["RTMean"] = cluster_obj["RTConsensus"]
             cluster_obj["RTStdErr"] = 0
 
-        cluster_obj["GNPSLinkout_Cluster"] = 'https://gnps.ucsd.edu/ProteoSAFe/result.jsp?task=%s&view=view_all_clusters_withID&show=true#{"main.cluster index_lowerinput":"%s","main.cluster index_upperinput":"%s"}' % (task_id, quantification_object["row ID"], quantification_object["row ID"])
+
+        # TODO see the task and gnps2 link
+        cluster_obj["GNPSLinkout_Cluster"] = ""
+        #cluster_obj["GNPSLinkout_Cluster"] = 'https://gnps.ucsd.edu/ProteoSAFe/result.jsp?task=%s&view=view_all_clusters_withID&show=true#{"main.cluster index_lowerinput":"%s","main.cluster index_upperinput":"%s"}' % (task_id, quantification_object["row ID"], quantification_object["row ID"])
         cluster_obj["sum(precursor intensity)"] = sum(all_abundances)
         cluster_obj["SumPeakIntensity"] = sum(all_abundances)
         cluster_obj["number of spectra"] = len(all_files)
@@ -261,16 +268,19 @@ def process(input_param_xml, input_consensus_feature_file, metadata_files, input
 
 def main():
     parser = argparse.ArgumentParser(description='Creating Clustering Info Summary')
-    parser.add_argument('params_xml', help='params_xml')
+    #parser.add_argument('params_xml', help='params_xml')
+    parser.add_argument('taskId', help='Task ID')
+    parser.add_argument('quant_table_ref', help='Quantification Table reformatted')
     parser.add_argument('consensus_feature_file', help='Consensus Quantification File')
     parser.add_argument('metadata_folder', help='metadata metadata_folder')
     parser.add_argument('mgf_filename', help='mgf_filename')
+
     parser.add_argument('output_clusterinfo_summary', help='output file')
     args = parser.parse_args()
 
     metadata_files = glob.glob(os.path.join(args.metadata_folder, "*"))
 
-    process(args.params_xml, args.consensus_feature_file, metadata_files, args.mgf_filename, args.output_clusterinfo_summary)
+    process(args.taskId, args.quant_table_ref, args.consensus_feature_file, metadata_files, args.mgf_filename, args.output_clusterinfo_summary)
 
 
 if __name__ == "__main__":

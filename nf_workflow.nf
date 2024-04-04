@@ -25,8 +25,8 @@ process reformat_quant_table{      //line 12 in tools.xml
 
 
     output:
-    path "quant_table_reformatted.csv"
-    path "spectra_reformatted.mgf"
+    path "quant_table_reformatted.csv", emit: quant_table_reformatted
+    path "spectra_reformatted.mgf", emit: spectra_reformatted
 
     """
     python $TOOL_FOLDER/reformat_quantification.py \
@@ -70,7 +70,7 @@ process tsv_merger{      //line 76 in tools.xml
     conda "$TOOL_FOLDER/conda_env.yml"
 
     input:
-    path intermediate_result //from main_execmoduleParallel
+    path intermediate_result //from main_execmoduleParallel //from main_execmoduleParallel
 
     output:
     path "result.tsv"
@@ -115,7 +115,7 @@ process filter_gc_identifications{    //line 114 in tools.xml
     path "db_result_filtered.tsv" 
 
     """
-    python $TOOL_FOLDER/pgetGNPS_library_annotations.py \
+    python $TOOL_FOLDER/filter_gc_identifications.py \
     $db_result \
     db_result_filtered.tsv
     """
@@ -129,15 +129,20 @@ process prep_molecular_networking_parameters{    //line 144 in tools.xml
 
     input:
     path mgf_file
-    path workflowParams
+    //path workflowParams
+    int min_matched_peaks = 1
+    float ion_tolerance = 0.75
+    float pm_tolerance = 1.0
+    float pairs_min_cosine = 0.25
 
     output:
     path networking_parameters 
 
     """
+    mkdir -p networking_parameters
     python $TOOL_FOLDER/prep_molecular_networking_parameters.py \
-    $mgf_file $workflowParams \
-    networking_parameters
+    $mgf_file $min_matched_peaks $ion_tolerance $pm_tolerance $pairs_min_cosine  \
+    networking_parameters 
     """
 } 
 
@@ -179,7 +184,7 @@ process merge_tsv_files_efficient{    //line 172 in tools.xml
     """
 } 
 
-process filter_networking_edges{    //line 183 in tools.xml 
+process filter_networking_edges{    //line 183 in tools.xml
     publishDir "./nf_output", mode: 'copy'
 
     conda "$TOOL_FOLDER/conda_env.yml"
@@ -213,8 +218,8 @@ process convert_networks_to_graphml{    //line 204 in tools.xml (python 2.7)
 
     """
     python $TOOL_FOLDER/convert_networks_to_graphml.py \
-    $networking_parameters $mgf_file $workflowParams \
-    networking_pairs_results_folder.aligns
+    $networking_selfloop $clusterinfosummarygroup_attributes_withIDs $result_specnets_DB \
+    gnps_molecular_network_graphml.graphml
     """
 } 
 
@@ -257,23 +262,26 @@ process add_mshub_balanced_score{    //line 249 in tools.xml
 } 
 
 // CLUSTER INFO
-process clusterinfosummary_for_featurenetworks{    //line 271 in tools.xml 
+process clusterinfosummary_creation{    //line 271 in tools.xml 
     publishDir "./nf_output", mode: 'copy'
 
     conda "$TOOL_FOLDER/conda_env.yml"
 
     input:
-    path workflowParams //file
+    int taskId = 0//file
+    path quant_table_ref
+
     path quantification_table //file
-    path metadata_table //folder
+    int metadata_table = 0//folder
     path spectra //file
 
     output:
     path 'clusterinfo_summary.tsv'
+    
 
     """
     python $TOOL_FOLDER/clusterinfosummary_for_featurenetworks.py \
-    $workflowParams $quantification_table $metadata_table $spectra \
+    $taskId $quant_table_ref $quantification_table $metadata_table $spectra \
     clusterinfo_summary.tsv
     """
 } 
@@ -323,17 +331,20 @@ workflow {
     quant_table_channel = Channel.fromPath(params.quant_table)
     library_channel = Channel.fromPath(params.library)
     
+    //formatting quantification
     reformat_quant_table(tool_name_channel, spectra_channel, quant_table_channel) // produces the intermediate_folder for tsv_merger
-    
-    main_execmoduleParallel(spectra_channel, library_channel)
+    spectraReformattedChannel = Channel.fromPath("./nf_output/spectra_reformatted.mgf")
+    intermediate_result = main_execmoduleParallel(spectraReformattedChannel, library_channel)
+    result = tsv_merger(intermediate_result)
+    db_result = gnps_library_annotations(result)
+    db_result_filtered = filter_gc_identifications(db_result)
 
+    //molecular networking
+    prep_molecular_networking_parameters(spectraReformattedChannel) //min_matched_peaks,ion_tolerance,pm_tolerance,pairs_min_cosine)
 
-
-    // result = tsv_merger(intermediate_result)
-
-    // db_result = gnps_library_annotations(result)
-
-    // db_result_filtered = filter_gc_identifications(db_result)
+    //cluster info
+    quant_table_reformatted_channel = Channel.fromPath("./nf_output/quant_table_reformatted.csv")
+    clusterinfosummary_creation(quant_table_reformatted_channel, quant_table_channel, spectraReformattedChannel)
 
 
 

@@ -18,12 +18,16 @@ def number_scans_in_mgf_file(mgf_filename):
 def main():
     parser = argparse.ArgumentParser(description='Create parallel parameters')
     parser.add_argument('mgf_filename', help='Input mgf file to network')
-    parser.add_argument('workflow_parameters', help='proteosafe xml parameters')
+    #parser.add_argument('workflow_parameters', help='proteosafe xml parameters')
+    parser.add_argument('MIN_MATCHED_PEAKS')
+    parser.add_argument('Ion_tolerance')
+    parser.add_argument('PM_tolerance')
+    parser.add_argument('PAIRS_MIN_COSINE')
     parser.add_argument('parameters_output_folder', help='output folder for parameters')
     parser.add_argument('--parallelism', default=1, type=int, help='Parallelism')
     args = parser.parse_args()
 
-    params_object = ming_proteosafe_library.parse_xml_file(open(args.workflow_parameters))
+    #params_object = ming_proteosafe_library.parse_xml_file(open(args.workflow_parameters))
 
     #Determing number of spectra in mgf file
     number_of_spectra = number_scans_in_mgf_file(args.mgf_filename)
@@ -36,11 +40,11 @@ def main():
     for i in range(parallelism):
         output_parameter_file = open(os.path.join(args.parameters_output_folder, str(i) + ".params"), "w")
         output_parameter_file.write("ALIGNS_FORMAT=%s\n" % ("tsv"))
-        output_parameter_file.write("MIN_MATCHED_PEAKS=%s\n" % (params_object["MIN_MATCHED_PEAKS"][0]))
-        output_parameter_file.write("TOLERANCE_PEAK=%s\n" % (params_object["tolerance.Ion_tolerance"][0]))
-        output_parameter_file.write("TOLERANCE_PM=%s\n" % (params_object["tolerance.PM_tolerance"][0]))
-        output_parameter_file.write("PAIRS_MIN_COSINE=%s\n" % (params_object["PAIRS_MIN_COSINE"][0]))
-        output_parameter_file.write("MAX_SHIFT=%s\n" % (params_object["MAX_SHIFT"][0]))
+        output_parameter_file.write("MIN_MATCHED_PEAKS=%s\n" % (args.MIN_MATCHED_PEAKS))#(params_object["MIN_MATCHED_PEAKS"][0])) #1
+        output_parameter_file.write("TOLERANCE_PEAK=%s\n" % (args.Ion_tolerance))#(params_object["Ion_tolerance"][0])) #0.75
+        output_parameter_file.write("TOLERANCE_PM=%s\n" % (args.PM_tolerance))#(params_object["PM_tolerance"][0])) #1
+        output_parameter_file.write("PAIRS_MIN_COSINE=%s\n" % (args.PAIRS_MIN_COSINE))#(params_object["PAIRS_MIN_COSINE"][0])) #0.25
+        output_parameter_file.write("MAX_SHIFT=%s\n" % (0))#(params_object["MAX_SHIFT"][0])) #!?
         output_parameter_file.write("INPUT_SPECTRA_MS2=%s\n" % (args.mgf_filename))
 
 
